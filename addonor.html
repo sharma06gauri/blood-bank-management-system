@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Donor</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .form-container { background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 450px; }
+        h1 { color: #d9534f; text-align: center; margin-bottom: 20px; }
+        .form-container label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .form-container input, .form-container select { width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        .form-container button { width: 100%; padding: 12px; border: none; background-color: #5cb85c; color: white; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .form-container button:hover { background-color: #4cae4c; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add New Donor</h1>
+        <form action="{{ url_for('add_donor') }}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="blood_type">Blood Type:</label>
+            <select id="blood_type" name="blood_type" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <button type="submit">Add Donor</button>
+        </form>
+    </div>
+</body>
+</html>
