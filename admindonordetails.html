@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Donor Details</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #d9534f; text-align: center; margin-bottom: 20px; }
+        .action-links { text-align: right; margin-bottom: 20px; }
+        .action-links a { text-decoration: none; background-color: #5cb85c; color: white; padding: 10px 15px; border-radius: 5px; margin-left: 10px; }
+        .action-links a:hover { background-color: #4cae4c; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #d9534f; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .no-results { text-align: center; color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Donor Details</h1>
+        <div class="action-links">
+            <a href="{{ url_for('add_donor') }}">Add New Donor</a>
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </div>
+        {% if donors %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Blood Type</th>
+                    <th>Contact</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td>{{ donor.id }}</td>
+                    <td>{{ donor.name }}</td>
+                    <td>{{ donor.blood_type }}</td>
+                    <td>{{ donor.contact }}</td>
+                    <td>
+                        <a href="{{ url_for('update_donor', donor_id=donor.id) }}">Update</a>
+                        |
+                        <a href="{{ url_for('delete_donor', donor_id=donor.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-results">No donors found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
