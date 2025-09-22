@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Patients</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #d9534f; text-align: center; margin-bottom: 20px; }
+        .add-link { display: block; text-align: right; margin-bottom: 20px; }
+        .add-link a { text-decoration: none; background-color: #5cb85c; color: white; padding: 10px 15px; border-radius: 5px; }
+        .add-link a:hover { background-color: #4cae4c; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #d9534f; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .no-results { text-align: center; color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient List</h1>
+        <div class="add-link">
+            <a href="{{ url_for('add_patient') }}">Add New Patient</a>
+        </div>
+        {% if patients %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Blood Type</th>
+                    <th>Required Units</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.blood_type }}</td>
+                    <td>{{ patient.required_units }}</td>
+                    <td>
+                        <a href="{{ url_for('update_patient', patient_id=patient.id) }}">Update</a>
+                        |
+                        <a href="{{ url_for('delete_patient', patient_id=patient.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-results">No patients found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
